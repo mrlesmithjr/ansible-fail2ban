@@ -1,0 +1,12 @@
+---
+- name: redhat | Installing Fail2ban (Fedora)
+  dnf:
+    name: "fail2ban"
+    state: "present"
+  when: ansible_distribution == "Fedora"
+
+- name: redhat | Installing Fail2ban (RedHat)
+  yum:
+    name: "fail2ban"
+    state: "present"
+  when: ansible_distribution != "Fedora"

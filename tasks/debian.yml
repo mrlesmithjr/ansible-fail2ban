@@ -1,0 +1,5 @@
+---
+- name: debian | Installing Fail2ban
+  apt:
+    name: "fail2ban"
+    state: "present"
