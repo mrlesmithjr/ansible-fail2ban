@@ -10,3 +10,13 @@
     name: "fail2ban"
     state: "present"
   when: ansible_distribution != "Fedora"
+
+- name: redhat | Ensuring PID ({{ fail2ban_pid_file }}) Directory Exists
+  file:
+    path: "{{ fail2ban_pid_file|dirname }}"
+    state: "directory"
+
+- name: redhat | Ensuring Socket ({{ fail2ban_socket }}) Directory Exists
+  file:
+    path: "{{ fail2ban_socket|dirname }}"
+    state: "directory"

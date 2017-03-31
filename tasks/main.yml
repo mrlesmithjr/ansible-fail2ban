@@ -8,3 +8,5 @@
 
 - include: config.yml
   when: fail2ban_config
+
+- include: service.yml

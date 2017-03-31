@@ -1,5 +1,11 @@
 [INCLUDES]
+{% if ansible_os_family == "Debian" %}
 before = paths-debian.conf
+{% elif ansible_os_family == "RedHat" %}
+{%   if ansible_distribution == "Fedora" %}
+before = paths-fedora.conf
+{%   endif %}
+{% endif %}
 
 [DEFAULT]
 action = %(action_)s
@@ -15,7 +21,11 @@ action_cf_mwl = cloudflare[cfuser="%(cfemail)s", cftoken="%(cfapikey)s"]
 action_blocklist_de  = blocklist_de[email="%(sender)s", service=%(filter)s, apikey="%(blocklist_de_apikey)s"]
 action_badips = badips.py[category="%(name)s", banaction="%(banaction)s"]
 backend = auto
+{% if ansible_os_family == "Debian" %}
 banaction = iptables-multiport
+{% elif ansible_os_family == "RedHat" %}
+banaction = firewallcmd-ipset
+{% endif %}
 bantime  = {{ fail2ban_bantime }}
 chain = {{ fail2ban_chain|upper }}
 destemail = {{ fail2ban_destemail }}
