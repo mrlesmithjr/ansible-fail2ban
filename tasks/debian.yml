@@ -3,3 +3,4 @@
   apt:
     name: "fail2ban"
     state: "present"
+  become: true
