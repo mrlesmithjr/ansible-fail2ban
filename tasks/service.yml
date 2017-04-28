@@ -3,3 +3,4 @@
   service:
     name: "fail2ban"
     enabled: yes
+  become: true
